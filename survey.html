@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ede7f6;
+        }
+
+        .container {
+            width: 50%;
+            height: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        input {
+            border: none;
+            outline: none;
+        }
+        
+        .ag-nav_list {
+            padding: 15px 0;
+            text-align: center;
+            font-size: 0;
+        }
+        .ag-nav_item {
+            display: inline-block;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .js-ag-nav_link {
+            padding: 0 10px 0 10px;
+            margin-left: 5px;
+            color: #000;
+            text-decoration: none;
+            position: relative;
+        }
+        .js-ag-active {
+            color: rgb(103, 58, 183);
+            cursor: default;
+        }
+        .js-ag-active:before,
+        .js-ag-nav_link:before {
+            content: "";
+            height: 2px;
+            background-color: rgb(103, 58, 183);
+            position: absolute;
+            left: 50%;
+            right: 50%;
+            bottom: -3px;
+        }
+        .js-ag-active:before,
+        .js-ag-nav_link:hover:before {
+            left: 0;
+            right: 0;
+        }
+        .title-survey {
+            padding: 10px 20px;
+            border-top: 8px solid rgb(103, 58, 183);
+            border-radius: 8px;
+        }
+        .input-survey {
+            font-size: 30px;
+            background-size: 0 2px, 100% 1px;
+            border: none;
+            width: 100%;
+            background-image: linear-gradient(#707cd2, #707cd2), linear-gradient(rgba(120, 130, 140, .13), rgba(120, 130, 140, .13));
+            background-color: rgba(0, 0, 0, 0);
+            background-position: center bottom, center calc(99%);
+            background-repeat: no-repeat;
+            height: 50px;
+
+        }
+        .input-survey:focus {
+            color: #707cd2;
+            background-size: 100% 2px, 100% 1px;
+            transition-duration: .3s;
+        }
+        .title-question,.title-answer {
+            background-size: 0 2px, 100% 1px;
+            border: none;
+            width: 95%;
+            background-image: linear-gradient(#707cd2, #707cd2), linear-gradient(rgba(120, 130, 140, .13), rgba(120, 130, 140, .13));
+            background-color: rgba(0, 0, 0, 0);
+            background-position: center bottom, center calc(99%);
+            background-repeat: no-repeat;
+            height: 30px;
+            font-size: 16px;
+        }
+        .title-question:focus,.title-answer:focus {
+            color: #707cd2;
+            background-size: 100% 2px, 100% 1px;
+            transition-duration: .3s;
+        }
+        .question-survey{
+            padding: 10px 20px;
+        }
+        .item-question{
+            padding-top: 10px;
+            border-top: 2px solid rgb(103, 58, 183);
+        }
+        .format-question{
+            display: flex;
+            justify-content: space-between;
+        }
+        .left-question{
+            width: calc(70% - 20px);
+        }
+        .right-question{
+            width: calc(30% - 20px);
+        }
+        .Kind-of-question{
+            padding: 5px;
+            border-radius: 3px;
+            width: 100%;
+        }
+        .answer{
+            margin-top: 20px;
+        }
+        .action-question{
+            text-align: right;
+        }
+        .action-question i{
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        /* short */
+        .item-radio-answer,.item-checkbox-answer, .add-item-answer, .item-select-answer{
+            display: flex;
+            justify-items: center;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        /*  */
+        #add-question{
+            padding: 10px 20px;
+        }
+        .item-checkbox-answer i{
+            opacity: 0.5;
+            margin-right: 5px;
+        }
+        .item-question .answer div .title-answer{
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="js-ag-primary-block ag-block">
+            <nav class="ag-nav_box">
+                <ul class="ag-nav_list">
+                    <li class="ag-nav_item">
+                        <a href="#js-ag-primary-block" class="js-ag-nav_link js-ag-active">Câu hỏi</a>
+                    </li>
+                    <li class="ag-nav_item">
+                        <a href="#js-ag-block-1" class="js-ag-nav_link">Câu trả lời</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="title-survey">
+            <input name="title" type="text" class="input-survey" value="Mẫu không có tiêu đề" autocomplete="off">
+        </div>
+        <div class="question-survey">
+            <div class="item-question">
+                <div class="format-question">
+                    <div class="left-question">
+                        <input name="title-question" type="text" class="title-question" placeholder="Câu hỏi" autocomplete="off">
+                    </div>
+                    <div class="right-question">
+                        <select name="Kind-of-question" class="Kind-of-question">
+                            <option value="doan">Đoạn</option>
+                            <option value="tracnhiem">Trắc nhiệm</option>
+                            <option value="hopkiem">Hộp kiểm</option>
+                            <option value="menuthaxuong">Menu thả xuống</option>
+                            <option value="">Tải tệp lên</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="answer">
+                    <input name="title-answer" type="text" class="title-answer" placeholder="Văn bản trả lời dài" autocomplete="off">
+                </div>
+                <div class="action-question">
+                    <i class="fas fa-trash-alt"></i>
+                </div>
+            </div>
+        </div>
+        <div id="add-question">
+            <i class="fas fa-plus-circle"></i>
+            <button type="submit" name="save-survey" value="save-survey">Lưu</button>
+            <button id="save-survey" type="button" name="save-survey" value="save-survey">Lưu Ajax</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    const question = `
+        <div class="item-question">
+            <div class="format-question">
+                <div class="left-question">
+                    <input name="title-question" type="text" class="title-question" placeholder="Câu hỏi" autocomplete="off">
+                </div>
+                <div class="right-question">
+                    <select name="Kind-of-question" class="Kind-of-question">
+                        <option value="doan">Đoạn</option>
+                        <option value="tracnhiem">Trắc nhiệm</option>
+                        <option value="hopkiem">Hộp kiểm</option>
+                        <option value="menuthaxuong">Menu thả xuống</option>
+                        <option value="">Tải tệp lên</option>
+                    </select>
+                </div>
+            </div>
+            <div class="answer">
+                <input name="title-answer" type="text" class="title-answer" placeholder="Văn bản trả lời dài" autocomplete="off">
+            </div>
+            <div class="action-question">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </div>`;
+    const doan = `
+        <input name="title-answer" type="text" class="title-answer" placeholder="Văn bản trả lời dài" autocomplete="off">
+    `;
+    const tracnhiem = `
+        <div class="item-answer item-radio-answer">
+            <input type="radio" disabled>
+            <input name="title-answer" type="text" class="title-answer" placeholder="Tùy chọn" autocomplete="off">
+        </div>
+    `;
+    const hopkiem = `
+        <div class="item-answer item-checkbox-answer">
+            <input type="checkbox" disabled>
+            <input name="title-answer" type="text" class="title-answer" placeholder="Tùy chọn" autocomplete="off">
+        </div>
+    `;
+    const menuthaxuong = `
+        <div class="item-answer item-select-answer">
+            <i class="far fa-caret-square-down fa-sm"></i>
+            <input name="title-answer" type="text" class="title-answer" placeholder="Tùy chọn" autocomplete="off">
+        </div>
+    `;
+    const add = `
+        <div class="add-item-answer">
+            <i class="fas fa-plus fa-xs"></i>
+            <span>Thêm tùy chọn</span>
+        </div>
+    `;
+    $(document).ready(function(){
+        $(document).on("change",".Kind-of-question",function(){
+            let koq = $(this);
+            switch(koq.val()){
+                case "doan": 
+                    koq.closest(".item-question").find(".answer").html(doan);
+                    break;
+                case "tracnhiem": 
+                    koq.closest(".item-question").find(".answer").html(tracnhiem);
+                    koq.closest(".item-question").find(".answer").append(add);
+                    break;
+                case "hopkiem": 
+                    koq.closest(".item-question").find(".answer").html(hopkiem);
+                    koq.closest(".item-question").find(".answer").append(add);
+                    break;
+                case "menuthaxuong": 
+                    koq.closest(".item-question").find(".answer").html(menuthaxuong);
+                    koq.closest(".item-question").find(".answer").append(add);
+                    break;
+                default: break;
+            }
+        })
+        $(document).on("click",".action-question i",function(){
+            $(this).closest(".item-question").remove();
+        });
+        $("#add-question i").click(function(){
+            $(this).closest(".container").find(".question-survey").append(question);
+        });
+        $(document).on("click",".add-item-answer",function(){
+            let koq = $(this).closest(".item-question").find(".Kind-of-question").val();
+            switch(koq){
+                case "tracnhiem": 
+                    $(tracnhiem).insertBefore($(this));
+                    break;
+                case "hopkiem": 
+                    $(hopkiem).insertBefore($(this));
+                    break;
+                case "menuthaxuong": 
+                    $(menuthaxuong).insertBefore($(this));
+                    break;
+                default: break;
+            }
+        })
+        $(document).on("click", "#save-survey", function () {
+            let maukhausat = {
+                'ma_khaosat' : Date.now(),
+                'thoigian'   : "",
+                'ten_khaosat': $(".input-survey").val(),
+                'id_taikhoan': 1,
+            }
+            let arr_cauhoi = [];
+            let arr_dapan = [];
+            let list_question = $(".item-question");
+            $.each(list_question,function(key,item){
+                let stt = key+1;
+                let object_question = {
+                    'ma_cauhoi'         : stt,
+                    'noidung_cauhoi'    : $(item).find(".title-question").val(),
+                    'thutu_cauhoi'      : stt,
+                    'ma_loaicauhoi'     : $(item).find(".Kind-of-question").val(),
+                }
+                arr_cauhoi = [...arr_cauhoi,object_question];
+                arr_dapan = get_dapan(item,arr_dapan,stt);
+            })
+            $data = {
+                'ma_khaosat': maukhausat,
+                'arr_cauhoi': arr_cauhoi,
+                'arr_dapan' : arr_dapan,
+            }
+            $.ajax({
+                url: "",
+                type: "post",
+                data: data,
+            })
+            .done(function(res){
+
+            })
+        })
+        function get_dapan(item,arr_dapan,stt){
+            $.each($(item).find(".item-answer"), function(key,item){
+                let object_answer = {
+                    'ma_cauhoi'     : stt,
+                    'tieude_dapan'  : $(item).find(".title-answer").val(),
+                    'thutu_dapan'   : key+1,
+                }
+                arr_dapan = [...arr_dapan,object_answer];
+            })
+            return arr_dapan;
+        }
+    })
+</script>
