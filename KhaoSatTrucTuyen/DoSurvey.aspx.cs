@@ -16,6 +16,7 @@ namespace KhaoSatTrucTuyen
         public DataTable ds_dapan = new DataTable();
         public Dictionary<string, Array> chitiet_hopkiem = new Dictionary<string, Array>();
         public Dictionary<string, string> chitiet_conlai = new Dictionary<string, string>();
+        public List<string> termsList = new List<string>();
         public string ma_khaosat = "";
         public string title_survey = "";
         public string status_survey = "";
@@ -49,13 +50,22 @@ namespace KhaoSatTrucTuyen
                 foreach (DataRow dr_ch in ds_cauhoi.Rows)
                 {
                     string dapan = Request.Form[dr_ch["ma_cauhoi"]+""].ToString();
-                    if (Equals(dr_ch["ma_loaicauhoi"], "doan"))
+                    switch(dr_ch["ma_loaicauhoi"])
                     {
-                        string noidung_dapan = Request.Form[dapan + ""];
-                        dt_add_dapan.Rows.Add(ma_phieu_khaosat,dr_ch["ma_cauhoi"],dapan,noidung_dapan);
-                        continue;
+                        case "doan":
+                            string noidung_dapan = Request.Form[dapan + ""];
+                            dt_add_dapan.Rows.Add(ma_phieu_khaosat, dr_ch["ma_cauhoi"], dapan, noidung_dapan);
+                            break;
+                        case "hopkiem":
+                            foreach (string Item in dapan.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                            {
+                                dt_add_dapan.Rows.Add(ma_phieu_khaosat, dr_ch["ma_cauhoi"], Item, "");
+                            }
+                            break;
+                        default:
+                            dt_add_dapan.Rows.Add(ma_phieu_khaosat, dr_ch["ma_cauhoi"], dapan, "");
+                            break;
                     }
-                    dt_add_dapan.Rows.Add(ma_phieu_khaosat, dr_ch["ma_cauhoi"], dapan,"");
                 }
                 SqlConnection con = new SqlConnection(DataProvider.Instance.conStr);
                 SqlCommand cmd = new SqlCommand("sp_chitiet_phieu", con);
@@ -88,7 +98,8 @@ namespace KhaoSatTrucTuyen
                 new KeyValuePair<string,string>("@ma_phieukhaosat",ma_phieu_khaosat),
             };
             DataTable dt = DataProvider.Instance.ExecuteQuery("sp_get_chitiet_phieu", lstParameter);
-            foreach(DataRow dr in dt.Rows)
+            
+            foreach (DataRow dr in dt.Rows)
             {
                 string ma_cauhoi = dr["ma_cauhoi"].ToString();
                 switch (dr["ma_loaicauhoi"])
@@ -97,7 +108,7 @@ namespace KhaoSatTrucTuyen
                         chitiet_conlai[ma_cauhoi] = dr["noidung_dapan"].ToString();
                         break;
                     case "hopkiem":
-                        chitiet_hopkiem[ma_cauhoi] = (dr["ma_dapan"].ToString()).Split(',');
+                        termsList.Add(dr["ma_dapan"].ToString());
                         break;
                     default:
                         chitiet_conlai[ma_cauhoi] = dr["ma_dapan"].ToString();

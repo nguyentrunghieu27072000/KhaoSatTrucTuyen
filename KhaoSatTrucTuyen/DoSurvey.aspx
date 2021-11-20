@@ -191,7 +191,7 @@
                                             <% break; %>
                                             <% case "hopkiem": %>
                                                 <% string check = ""; %>
-                                                <% if (chitiet_hopkiem.Count > 0 && ((IList)chitiet_hopkiem[mach]).Contains(mada)){ check = "checked"; } %>
+                                                <% if (termsList.Count > 0 && ((IList)termsList).Contains(mada)){ check = "checked"; } %>
                                                 <div class="item-anwer">
                                                     <input id="<%= cauhoi+"_"+dapan %>" name="<%= mach%>" type="checkbox" class="checkbox-answer" value="<%= mada %>" <%= check %> />
                                                     <label for="<%= cauhoi+"_"+dapan %>"><%= drdapan["tieude_dapan"] %></label>

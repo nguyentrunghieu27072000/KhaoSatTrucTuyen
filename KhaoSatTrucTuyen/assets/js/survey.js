@@ -54,12 +54,16 @@ const add = `
     </div>
 `;
 $(document).ready(function () {
+    // Sự kiện khi loại câu hỏi được thay đổi thì tạo ra các đối tượng con tương ứng với loại câu hỏi
     $(document).on("change", ".Kind-of-question", function () {
+        // Đánh dấu câu hỏi
         let koq = $(this);
+        // Lấy id câu hỏi
         let id = koq.closest(".item-question").attr("data-id");
         let answer = koq.closest(".item-question").find(".answer");
         let html_answer = `<input type="hidden" class="sl_answer" value="1" />`;
         obj_answer = $(`${html_answer}`).attr("name", "sl_answer" + id);
+        // Tạo đối tượng tương ứng với loại câu hỏi. Gồm câu hỏi và item đáp án
         switch (koq.val()) {
             case "doan":
                 koq.closest(".item-question").find(".answer").html(doan);
@@ -89,31 +93,45 @@ $(document).ready(function () {
             default: break;
         }
     })
+    // Xóa câu hỏi
     $(document).on("click", ".action-question i", function () {
         let item_question_remove = $(this).closest(".item-question");
         item_question_remove.remove();
     });
+    // Xóa đáp án trong câu hỏi
     $(document).on("click", ".item-answer .fa-times", function () {
         let item_answer_remove = $(this).closest(".item-answer");
         item_answer_remove.remove();
     });
+    // Thêm câu hỏi mới
     $("#add-question i").click(function () {
         let sl_question = $(".sl_question");
         let id_new = +sl_question.val() + +1;
-        sl_question.val(id_new)
+        sl_question.val(id_new);
+        // Khởi tạo đối tượng câu hỏi
+        // Mặc định câu hỏi dạng đoạn
         obj_question = $(`${question}`);
+        // truyền id mới cho câu hỏi
         obj_question.attr("data-id", id_new);
+        // Đánh dấu loại câu hỏi 
         obj_question.find(".Kind-of-question").attr("name", "Kind_of_question_" + id_new)
+        // Đánh dấu tiêu đề câu hỏi
         obj_question.find(".title-question").attr("name", "title_question_" + id_new);
+        // Đánh dấu tiêu đề đáp án
         obj_question.find(".title-answer").attr("name", "title_answer_" + id_new);
+        // Đánh dấu số lượng đáp án
         obj_question.find(".sl_answer").attr("name", "sl_answer" + id_new);
         $(this).closest(".container").find(".question-survey").append(obj_question);
     });
+    // Thêm đáp án cho câu hỏi
     $(document).on("click", ".add-item-answer", function () {
+        // Kiểm tra là đáp án cho câu hỏi loại nào
         let koq = $(this).closest(".item-question").find(".Kind-of-question").val();
         let sl_answer = $(this).closest(".item-question").find(".sl_answer");
+        // Tăng số lượng đán án lên 1
         let sl_new = +sl_answer.val() + +1;
         sl_answer.val(sl_new);
+        // Tạo đối tượng item đáp án tương ứng với loại câu hỏi
         switch (koq) {
             case "tracnhiem":
                 var obj_tracnhiem = $(`${tracnhiem}`);
