@@ -16,6 +16,7 @@ namespace KhaoSatTrucTuyen
         public string loaicauhoi_selected = "doan";
         protected void Page_Load(object sender, EventArgs e)
         {
+            get_soluong_mau();
             if(Request.Form["save-survey"] == "save-survey")
             {
                 save_survey();
@@ -54,7 +55,8 @@ namespace KhaoSatTrucTuyen
         }
         public void save_survey()
         { 
-            string ma = DateTime.Now.Millisecond.ToString();
+            string ma = ((Int32)DateTime.Now.Subtract(new DateTime(1970, 1, 1)).TotalSeconds).ToString();
+            string id_taikhoan = Session["login"].ToString();
             string title_servey = Request.Form["title_survey"];
             int count_question = int.Parse(Request.Form["sl_question"]);
             var lstParameter = new List<KeyValuePair<string, string>>
@@ -62,7 +64,7 @@ namespace KhaoSatTrucTuyen
                     new KeyValuePair<string, string>("@ma_khaosat",ma),
                     new KeyValuePair<string, string>("@thoigian",DateTime.Now.ToString("yyyy-MM-dd")),
                     new KeyValuePair<string, string>("@ten_khaosat",title_servey),
-                    new KeyValuePair<string, string>("@id_taikhoan","1"),
+                    new KeyValuePair<string, string>("@id_taikhoan",id_taikhoan),
                 };
             bool flg = DataProvider.Instance.ExecuteQueryNoReturn("sp_add_survey", lstParameter);
             if (flg)
@@ -80,7 +82,7 @@ namespace KhaoSatTrucTuyen
                 dt.Columns.Add(new DataColumn("ma_loaicauhoi"));
                 for(int i = 1; i <= count_question; ++i)
                 {
-                    if(Request.Form["title_question_" + i] == null)
+                    if(Request.Form["title_question_" + i] == null )
                     {
                         continue;
                     }
@@ -133,6 +135,19 @@ namespace KhaoSatTrucTuyen
             con.Open();
             cmd.ExecuteNonQuery();
             con.Close();
+        }
+        public void get_soluong_mau()
+        {
+            /*string id_taikhoan = Session["login"].ToString();
+            SqlConnection con = new SqlConnection(DataProvider.Instance.conStr);
+            SqlCommand cmd = new SqlCommand("select COUNT(ma_khaosat) as soluong from tbl_maukhaosat where id_taikhoan = "+ id_taikhoan, con);
+            con.Open();
+            SqlDataReader sdr = cmd.ExecuteReader();
+            while (sdr.Read())
+            {
+                sl_khaosat.InnerText = sdr["soluong"].ToString();
+            }
+            con.Close();*/
         }
     }
 }

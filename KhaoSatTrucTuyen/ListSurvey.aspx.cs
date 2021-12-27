@@ -22,7 +22,7 @@ namespace KhaoSatTrucTuyen
         public int check_send = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
-            string id_taikhoan = "1";
+            string id_taikhoan = Session["login"].ToString();
             if (Request.QueryString["id"] != null)
             {
                 ma_khaosat_active = Request.QueryString["id"];

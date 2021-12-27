@@ -8,6 +8,17 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="assets/css/style.css" />
+    <style>
+        #user{
+            float:right;
+        }
+        #username{
+            color: #fff;
+            height: 47px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -18,8 +29,8 @@
             <li><a href="SurveyForm.aspx">Tạo biểu mẫu</a></li>
             <li><a href="ListSurvey.aspx">Biểu mẫu</a></li>
             <li><a href="DoSurvey.aspx">Làm khảo sát</a></li>
-            <li><a href="#">Bạn bè</a></li>
             <li id="logout"><a href="Logout.aspx">Đăng xuất</a></li>
+            <li id="user"><asp:Label ID="username" runat="server"></asp:Label></li>
         </ul>
     </div>
     <div class="wrap">

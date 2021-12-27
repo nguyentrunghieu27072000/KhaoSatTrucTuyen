@@ -39,6 +39,7 @@ namespace KhaoSatTrucTuyen
                         if (Equals(data["matkhau"], pass))
                         {
                             Session["login"] = data["id_taikhoan"];
+                            Session["username"] = data["ten_taikhoan"];
                             Response.Redirect("Home.aspx");
                         }
                     }

@@ -11,8 +11,9 @@ namespace KhaoSatTrucTuyen
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*if(Session["login"].Equals(""))
-            Response.Redirect("Login.aspx");*/
+            username.Text = Session["username"].ToString();
+            if (Session["login"].Equals(""))
+                Response.Redirect("Login.aspx");
         }
     }
 }

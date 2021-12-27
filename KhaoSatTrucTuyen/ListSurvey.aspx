@@ -83,7 +83,10 @@
                                 <a href="#" class="js-ag-nav_link js-ag-active">Câu hỏi</a>
                             </li>
                             <li class="ag-nav_item">
-                                <a href="chart.aspx?id=<%=ma_khaosat_active %>" class="js-ag-nav_link">Câu trả lời</a>
+                                <a href="ketqua.aspx?id=<%=ma_khaosat_active %>" class="js-ag-nav_link js-ag-active">Câu Trả lời</a>
+                            </li>
+                            <li class="ag-nav_item">
+                                <a target="_blank" class="js-ag-nav_link" href="ExportExcel.aspx?id=<%=ma_khaosat_active %>">Excel</a>
                             </li>
                         </ul>
                     </nav>

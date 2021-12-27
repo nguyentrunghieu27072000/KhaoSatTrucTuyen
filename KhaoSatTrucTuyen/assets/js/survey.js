@@ -10,7 +10,6 @@ const question = `
                     <option value="tracnhiem">Trắc nhiệm</option>
                     <option value="hopkiem">Hộp kiểm</option>
                     <option value="menuthaxuong">Menu thả xuống</option>
-                    <option value="">Tải tệp lên</option>
                 </select>
             </div>
         </div>

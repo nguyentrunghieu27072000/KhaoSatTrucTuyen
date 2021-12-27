@@ -44,6 +44,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System.Web.DataVisualization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -72,6 +76,8 @@
     <Content Include="assets\Style.css" />
     <Content Include="chart.aspx" />
     <Content Include="DoSurvey.aspx" />
+    <Content Include="ExportExcel.aspx" />
+    <Content Include="ketqua.aspx" />
     <Content Include="ListSurvey.aspx" />
     <Content Include="SurveyForm.aspx" />
     <Content Include="Global.asax" />
@@ -95,6 +101,20 @@
     </Compile>
     <Compile Include="DoSurvey.aspx.designer.cs">
       <DependentUpon>DoSurvey.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExportExcel.aspx.cs">
+      <DependentUpon>ExportExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExportExcel.aspx.designer.cs">
+      <DependentUpon>ExportExcel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ketqua.aspx.cs">
+      <DependentUpon>ketqua.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ketqua.aspx.designer.cs">
+      <DependentUpon>ketqua.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListSurvey.aspx.cs">
       <DependentUpon>ListSurvey.aspx</DependentUpon>
@@ -153,7 +173,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

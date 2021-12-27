@@ -12,7 +12,7 @@
     <script src="assets/js/survey.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <form method="post">
+    <form method="post" runat="server">
         <div class="container">
             <div class="nav">
                 <nav class="ag-nav_box">
@@ -21,7 +21,14 @@
                             <a href="#js-ag-primary-block" class="js-ag-nav_link js-ag-active">Câu hỏi</a>
                         </li>
                         <li class="ag-nav_item">
-                            <a href="#js-ag-block-1" class="js-ag-nav_link">Câu trả lời</a>
+                            <a href="#" class="js-ag-nav_link" runat="server">
+                                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server" RenderMode="Inline" UpdateMode="Always">
+                                     <ContentTemplate>
+                                         <label id="sl_khaosat" runat="server"></label>
+                                     </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </a>
                         </li>
                     </ul>
                 </nav>
